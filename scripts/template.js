@@ -48,16 +48,16 @@ process.stdin.on("readable", () => {
 <script lang="ts" src="./${dirName}.ts"></script>
 
 <style lang="scss">
-  @import './${dirName}.scss'
+  @import './${dirName}.scss';
 </style>
 
 `;
 
 // ts 模版
-        const tsTep = `import { Component, Vue } from "vue-property-decorator"
-import { Getter, Action } from "vuex-class"
-import { ${capPirName}Data } from '@/types/views/${dirName}.d'
-// import {  } from "@/components" // 组件
+        const tsTep = `import { Component, Vue } from "vue-property-decorator";
+import { Getter, Action } from "vuex-class";
+import { ${capPirName}Data } from '@/types/views/${dirName}.d';
+// import {  } from "@/components"; // 组件
 
 @Component({})
 export default class About extends Vue {
@@ -150,7 +150,7 @@ const actions: ActionTree<${capPirName}State, any> = {
     commit('UPDATE_STATE', data)
   },
   // GET_DATA_ASYN({ commit, state: LoginState }) {
-  //   ${capPirName}.getData()
+  //   ${capPirName}Api.getData();
   // }
 }
 
@@ -164,10 +164,10 @@ export default {
 `;
 
 // api 接口模版
-        const apiTep = `import Api from '@/utils/request'
+        const apiTep = `import Api from '@/utils/request';
 
 export const getData = () => {
-  return Api.getData()
+  return Api.getData();
 }
 
 `;

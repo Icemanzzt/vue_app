@@ -1,38 +1,38 @@
 
-import Cookies from 'js-cookie'
-import { cookieExpires } from '@/config' // cookie保存的天数
+import Cookies from 'js-cookie';
+import { cookieExpires } from '@/config'; // cookie保存的天数
 
 /**
  * @Author: asheng
  * @msg: 存取token
  * @param {string} token
  */
-export const TOKEN_KEY: string = 'token'
+export const TOKEN_KEY: string = 'token';
 export const setToken = (token: string) => {
-    Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
-}
+    Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 });
+};
 export const getToken = () => {
-    const token = Cookies.get(TOKEN_KEY)
+    const token = Cookies.get(TOKEN_KEY);
     if (token) {
-        return token
+        return token;
     } else {
-        return false
+        return false;
     }
-}
+};
 
 /**
  * @param {String} url
  * @description 从URL中解析参数
  */
 export const getParams = (url: string) => {
-    const keyValueArr = url.split('?')[1].split('&')
-    const paramObj: any = {}
+    const keyValueArr = url.split('?')[1].split('&');
+    const paramObj: any = {};
     keyValueArr.forEach(item => {
-        const keyValue = item.split('=')
-        paramObj[keyValue[0]] = keyValue[1]
-    })
-    return paramObj
-}
+        const keyValue = item.split('=');
+        paramObj[keyValue[0]] = keyValue[1];
+    });
+    return paramObj;
+};
 
 /**
  * 判断一个对象是否存在key，如果传入第二个参数key，则是判断这个obj对象是否存在key这个属性
@@ -40,12 +40,12 @@ export const getParams = (url: string) => {
  */
 export const hasKey = (obj: any, key: string | number) => {
     if (key) {
-        return key in obj
+        return key in obj;
     } else {
-        const keysArr = Object.keys(obj)
-        return keysArr.length
+        const keysArr = Object.keys(obj);
+        return keysArr.length;
     }
-}
+};
 
 /**
  * @msg: 获取系统当前时间
@@ -53,8 +53,8 @@ export const hasKey = (obj: any, key: string | number) => {
  * @return: string
  */
 export const getDate = (fmt: any) => {
-    let time = ''
-    const date = new Date()
+    let time = '';
+    const date = new Date();
     const o: any = {
         'M+': date.getMonth() + 1, // 月份
         'd+': date.getDate(), // 日
@@ -63,17 +63,17 @@ export const getDate = (fmt: any) => {
         's+': date.getSeconds(), // 秒
         'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
         'S': date.getMilliseconds() // 毫秒
-    }
+    };
     if (/(y+)/.test(fmt)) {
-        time = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+        time = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
     }
     for (const k in o) {
         if (new RegExp('(' + k + ')').test(fmt)) {
-            time = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+            time = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
         }
     }
-    return time
-}
+    return time;
+};
 
 /**
  * @msg: 获取系统当前时间
@@ -82,7 +82,7 @@ export const getDate = (fmt: any) => {
  * @return: string
  */
 export const formatDate = (date: any, fmt: string) => {
-    let time = ''
+    let time = '';
     const o: any = {
         'M+': date.getMonth() + 1, // 月份
         'd+': date.getDate(), // 日
@@ -91,17 +91,17 @@ export const formatDate = (date: any, fmt: string) => {
         's+': date.getSeconds(), // 秒
         'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
         'S': date.getMilliseconds() // 毫秒
-    }
+    };
     if (/(y+)/.test(fmt)) {
-        time = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+        time = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
     }
     for (const k in o) {
         if (new RegExp('(' + k + ')').test(fmt)) {
-            time = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+            time = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
         }
     }
-    return time
-}
+    return time;
+};
 
 // copy in the 'fx-fuli' utils
 /**
@@ -110,46 +110,46 @@ export const formatDate = (date: any, fmt: string) => {
  */
 
 export const verifyPhone = (phone: string | number) => {
-    const reg = /^1[34578][0-9]{9}$/
-    const _phone = phone.toString().trim()
-    const toastStr = _phone === '' ? '手机号不能为空~' : !reg.test(_phone) && '请输入正确手机号~'
+    const reg = /^1[34578][0-9]{9}$/;
+    const _phone = phone.toString().trim();
+    const toastStr = _phone === '' ? '手机号不能为空~' : !reg.test(_phone) && '请输入正确手机号~';
     return {
         errMsg: toastStr,
         done: !toastStr,
         value: _phone
-    }
-}
+    };
+};
 
 export const verifyStr = (str: string | number, text: string) => {
-    const _str = str.toString().trim()
-    const toastStr = _str.length ? false : `请填写${text}～`
+    const _str = str.toString().trim();
+    const toastStr = _str.length ? false : `请填写${text}～`;
     return {
         errMsg: toastStr,
         done: !toastStr,
         value: _str
-    }
-}
+    };
+};
 
 // 截取字符串
 export const sliceStr = (str: any, sliceLen: number) => {
-    if (!str) { return '' }
-    let realLength = 0
-    const len = str.length
-    let charCode = -1
+    if (!str) { return ''; }
+    let realLength = 0;
+    const len = str.length;
+    let charCode = -1;
     for (let i = 0; i < len; i++) {
-        charCode = str.charCodeAt(i)
+        charCode = str.charCodeAt(i);
         if (charCode >= 0 && charCode <= 128) {
-            realLength += 1
+            realLength += 1;
         } else {
-            realLength += 2
+            realLength += 2;
         }
         if (realLength > sliceLen) {
-            return `${str.slice(0, i)}...`
+            return `${str.slice(0, i)}...`;
         }
     }
 
-    return str
-}
+    return str;
+};
 
 
 /**
@@ -158,21 +158,21 @@ export const sliceStr = (str: any, sliceLen: number) => {
  * @return {Object | Json} 新的json对象
  */
 export function objClone(jsonObj: any) {
-    let buf: any
+    let buf: any;
     if (jsonObj instanceof Array) {
-        buf = []
-        let i = jsonObj.length
+        buf = [];
+        let i = jsonObj.length;
         while (i--) {
-            buf[i] = objClone(jsonObj[i])
+            buf[i] = objClone(jsonObj[i]);
         }
-        return buf
+        return buf;
     } else if (jsonObj instanceof Object) {
-        buf = {}
+        buf = {};
         for (const k in jsonObj) {
-            buf[k] = objClone(jsonObj[k])
+            buf[k] = objClone(jsonObj[k]);
         }
-        return buf
+        return buf;
     } else {
-        return jsonObj
+        return jsonObj;
     }
 }

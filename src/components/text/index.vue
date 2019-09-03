@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { Component, Vue, Prop } from 'vue-property-decorator';
-  import { Getter, Action } from 'vuex-class'
+  import { Getter, Action } from 'vuex-class';
   import { TextData } from '@/types/components/text.d';
   // import {  } from "@/components" // 组件
 
@@ -16,12 +16,12 @@
     @Prop({
       required: false,
       default: ''
-    }) name!: string
+    }) name!: string;
 
     // data
     data: TextData = {
       componentName: 'text'
-    }
+    };
 
     created() {
       //
