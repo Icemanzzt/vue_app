@@ -1,6 +1,6 @@
 import Api from '@/utils/request';
-
-export const getData = () => {
-  return Api.getData();
+import {ILoginReqParams} from '@/types/views/login';
+export const getData = (params: ILoginReqParams) => {
+  return Api.getData(params);
 };
 

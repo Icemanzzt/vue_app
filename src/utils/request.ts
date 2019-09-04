@@ -1,14 +1,13 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
-import { MAINHOST, ISMOCK, conmomPrams } from '@/config';
-import requestConfig from '@/config/requestConfig';
+import { MAINHOST, ISMOCK, conmomPrams, requestUrl } from '@/config';
 import { getToken } from '@/utils/common';
 import router from '@/router';
 
 declare type Methods = 'GET' | 'OPTIONS' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
-declare interface Datas {
+declare interface IDatas {
     [key: string]: any;
 }
-const baseURL = process.env.NODE_ENV === 'production' ? MAINHOST : location.origin;
+const baseURL = process.env.NODE_ENV === 'production' ? MAINHOST : window.location.origin;
 const token = getToken();
 
 class HttpRequest {
@@ -76,7 +75,7 @@ const requestFail = (res: AxiosResponse) => {
 };
 
 // 合并axios参数
-const conbineOptions = (_opts: any, data: Datas, method: Methods): AxiosRequestConfig => {
+const conbineOptions = (_opts: any, data: IDatas, method: Methods): AxiosRequestConfig => {
     let opts = _opts;
     if (typeof opts === 'string') {
         opts = { url: opts };
@@ -98,22 +97,21 @@ const HTTP = new HttpRequest();
  */
 const Api = (() => {
     const apiObj: any = {};
-    const requestList: any = requestConfig;
+    const requestList: any = requestUrl;
     const fun = (opts: AxiosRequestConfig | string) => {
         return async (data = {}, method: Methods = 'POST') => {
-            if (!token) {
+            /*if (!token) {
                 console.error('No Token');
                 return router.replace({ name: 'login' });
-            }
+            }*/
             const newOpts = conbineOptions(opts, data, method);
             const res = await HTTP.request(newOpts);
             return res;
         };
     };
-    Object.keys(requestConfig).forEach((key) => {
+    Object.keys(requestUrl).forEach((key) => {
         apiObj[key] = fun(requestList[key]);
     });
-
     return apiObj;
 })();
 
