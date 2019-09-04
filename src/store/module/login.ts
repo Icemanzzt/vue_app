@@ -27,14 +27,22 @@ const mutations: MutationTree<LoginState> = {
 
 const actions: ActionTree<LoginState, any> = {
   UPDATE_STATE_ASYN({ commit, state: LoginState }, data: LoginState) {
+    console.log(data);
     commit('UPDATE_STATE', data);
   },
-  // GET_DATA_ASYN({ commit, state: LoginState }) {
-  //   Login.getData()
-  // }
+  GET_DATA_ASYN({ commit, state: LoginState }) {
+    LoginApi.getData();
+  }
 };
-
+// @ts-ignore
+export type gettersType = ReturnType<typeof actions>;
+// @ts-ignore
+export type mutationsType = ReturnType<typeof actions>;
+// @ts-ignore
+export type actionType = ReturnType<typeof actions>;
+const namespaced: boolean = true;
 export default {
+  namespaced,
   state,
   getters,
   mutations,

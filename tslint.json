@@ -9,10 +9,10 @@
     ]
   },
   "rules": {
-    "indent": [true, "spaces", 2],
+    "indent": [true, "spaces", 4],
     "quotemark": [true, "single", 2],
     "member-access": false, // 需要类成员的显式可见性声明。
-    "interface-name": false, // 接口名要求大写开头
+    "interface-name": true, // 接口名要求大写开头
     "ordered-imports": false, // 要求将import语句按字母顺序排列并进行分组。
     "object-literal-sort-keys": false, // 检查对象文字中键的排序。
     "no-consecutive-blank-lines": false, // 不允许连续出现一个或多个空行。

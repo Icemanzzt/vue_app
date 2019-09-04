@@ -1,3 +1,4 @@
+
 <template>
   <div class="login-wrap" @click="goHome()">
     {{data.pageName}}

@@ -6,7 +6,6 @@ import router from '@/router';
 
 declare type Methods = 'GET' | 'OPTIONS' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
 declare interface Datas {
-    method?: Methods;
     [key: string]: any;
 }
 const baseURL = process.env.NODE_ENV === 'production' ? MAINHOST : location.origin;
@@ -84,7 +83,7 @@ const conbineOptions = (_opts: any, data: Datas, method: Methods): AxiosRequestC
     }
     const _data = { ...conmomPrams, ...opts.data, ...data };
     const options = {
-        method: opts.method || data.method || method || 'GET',
+        method: opts.method || data.method || method || 'post',
         url: opts.url,
         header: { 'user-token': token },
         baseURL
@@ -101,7 +100,7 @@ const Api = (() => {
     const apiObj: any = {};
     const requestList: any = requestConfig;
     const fun = (opts: AxiosRequestConfig | string) => {
-        return async (data = {}, method: Methods = 'GET') => {
+        return async (data = {}, method: Methods = 'POST') => {
             if (!token) {
                 console.error('No Token');
                 return router.replace({ name: 'login' });

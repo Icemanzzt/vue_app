@@ -1,8 +1,9 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { Getter, Action } from 'vuex-class';
+import { Getter, Action, namespace } from 'vuex-class';
 import { LoginData } from '@/types/views/login.d';
-// import {  } from "@/components" // 组件
+import { actionType } from '@/store/module/login'; // 组件
 import { Text } from '@/components'; // 组件
+const loginStore = namespace('Login');
 @Component({
   components: {
     Tx: Text
@@ -11,9 +12,10 @@ import { Text } from '@/components'; // 组件
 export default class About extends Vue {
   // Getter
   // @Getter login.author
-    
+
   // Action
-  // @Action GET_DATA_ASYN
+  @loginStore.Action GET_DATA_ASYN: actionType;
+  @loginStore.Action UPDATE_STATE_ASYN: actionType;
 
   // data
   data: LoginData = {
@@ -22,7 +24,6 @@ export default class About extends Vue {
 
   created() {
     //
-    console.log('666');
   }
     
   activated() {
@@ -31,12 +32,15 @@ export default class About extends Vue {
 
   mounted() {
     //
+    console.log(process.env.APP_ENV);
+    console.log(process.env);
 
+    this.GET_DATA_ASYN();
+    this.UPDATE_STATE_ASYN({author: 11});
   }
 
 
   goHome() {
-    console.log(this.$router);
     this.$router.push('/home').catch((err) => {
       console.log(err);
     });

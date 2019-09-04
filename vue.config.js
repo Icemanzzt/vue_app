@@ -1,12 +1,28 @@
 const path = require('path')
-
+const chalk = require('chalk');
+const webpack = require('webpack');
 const resolve = dir => {
     return path.join(__dirname, dir)
 }
 
 // 线上打包路径，请根据项目实际线上情况
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : '/'
-
+const {APP_ENV} = process.env;
+const proxyUrlAndPort = {
+    development: {
+        url: 'https://www.easy-mock.com',
+        port: 8090
+    },
+    test: {
+        url: 'https://www.easy-mock.com',
+        port: 8091
+    }
+}
+const proxyUrl = proxyUrlAndPort[APP_ENV].url; // 当前运行环境代理接口域名
+const port = proxyUrlAndPort[APP_ENV].port; // 当前运行环境代理端口
+const log = console.log;
+log(chalk.yellow(`APP当前运行环境：${APP_ENV}`));
+log(chalk.green(`APP当前运行环境代理域名：${proxyUrl}`));
 module.exports = {
     publicPath: BASE_URL,
     outputDir: 'dist', // 打包生成的生产环境构建文件的目录
@@ -20,6 +36,16 @@ module.exports = {
             .set('@', resolve('src'))
             .set('_c', resolve('src/components'))
     },
+    configureWebpack: {
+        resolve: {
+            alias: {
+                src: resolve('src')
+            }
+        },
+        plugins: [new webpack.DefinePlugin({
+            'process.env.APP_ENV': JSON.stringify(APP_ENV)
+        })]
+    },
     css: {
         modules: false, // 启用 CSS modules
         extract: true, // 是否使用css分离插件
@@ -27,7 +53,7 @@ module.exports = {
         loaderOptions: {} // css预设器配置项
     },
     devServer: {
-        port: 8090, // 端口
-        proxy: 'https://www.easy-mock.com' // 设置代理
+        port, // 端口
+        proxy: proxyUrl // 设置代理
     }
 }

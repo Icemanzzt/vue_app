@@ -33,8 +33,9 @@ const actions: ActionTree<HomeState, any> = {
   //   Home.getData()
   // }
 };
-
+const namespaced: boolean = true;
 export default {
+  namespaced,
   state,
   getters,
   mutations,

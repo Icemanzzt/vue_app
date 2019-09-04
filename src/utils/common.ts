@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import { cookieExpires } from '@/config'; // cookie保存的天数
 
 /**
- * @Author: asheng
  * @msg: 存取token
  * @param {string} token
  */
