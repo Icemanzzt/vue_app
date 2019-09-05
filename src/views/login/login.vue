@@ -1,7 +1,11 @@
 
 <template>
-  <div class="login-wrap" @click="goHome()">
-    {{loginInfo.data.userName}}
+
+  <div class="login-wrap">
+    <Hd title="登录" ></Hd>
+    <div @click="goHome()">
+      {{loginInfo.data.userName}}
+    </div>
     <div>
       <Tx/>
     </div>

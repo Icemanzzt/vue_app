@@ -5,10 +5,12 @@ import { mapGetters } from 'vuex';
 import { ILoginData } from '@/types/views/login.d';
 import { gettersType, actionType } from '@/store/module/login'; // 组件
 import { Text } from '@/components'; // 组件
+import { Hender } from '@/components'; // 组件
 const loginStore = namespace('Login');
 @Component({
   components: {
-    Tx: Text
+    Tx: Text,
+    Hd: Hender
   }
 })
 export default class Index extends Vue {
@@ -49,7 +51,12 @@ export default class Index extends Vue {
     console.log(this.data);
   }
 
-
+  onClickLeft = (text: string) => {
+    console.log('子组件向父组件传值成功：', text);
+  }
+  onClickRight = () => {
+    console.log('right');
+  }
 
   goHome() {
     this.$router.push('/home').catch((err) => {

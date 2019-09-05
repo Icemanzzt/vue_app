@@ -2,6 +2,7 @@ import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { MAINHOST, ISMOCK, conmomPrams, requestUrl } from '@/config';
 import { getToken } from '@/utils/common';
 import router from '@/router';
+import { Toast } from 'vant';
 
 declare type Methods = 'GET' | 'OPTIONS' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
 declare interface IDatas {
@@ -105,7 +106,9 @@ const Api = (() => {
                 return router.replace({ name: 'login' });
             }*/
             const newOpts = conbineOptions(opts, data, method);
+            Toast.loading({message: '加载中', mask: true});
             const res = await HTTP.request(newOpts);
+            Toast.clear();
             return res;
         };
     };

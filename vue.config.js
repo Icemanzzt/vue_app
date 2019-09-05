@@ -18,8 +18,9 @@ const proxyUrlAndPort = {
         port: 8091
     }
 }
-const proxyUrl = proxyUrlAndPort[APP_ENV].url; // 当前运行环境代理接口域名
-const port = proxyUrlAndPort[APP_ENV].port; // 当前运行环境代理端口
+const proxyUrlAndPortObj = proxyUrlAndPort[APP_ENV]
+const proxyUrl = proxyUrlAndPortObj? proxyUrlAndPortObj.url : ''; // 当前运行环境代理接口域名
+const port = proxyUrlAndPortObj ? proxyUrlAndPortObj.port : ''; // 当前运行环境代理端口
 const log = console.log;
 log(chalk.yellow(`APP当前运行环境：${APP_ENV}`));
 log(chalk.green(`APP当前运行环境代理域名：${proxyUrl}`));
@@ -35,6 +36,18 @@ module.exports = {
         config.resolve.alias
             .set('@', resolve('src'))
             .set('_c', resolve('src/components'))
+        config.module
+            .rule('tslint')
+            .test(/\.ts$/)
+            .use('tslint-loader')
+            .loader('tslint-loader')
+            .end()
+        config.module
+            .rule('ts')
+            .test(/\.ts$/)
+            .use('thread-loader')
+            .loader('thread-loader')
+            .end()
     },
     configureWebpack: {
         resolve: {
