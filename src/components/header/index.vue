@@ -45,10 +45,10 @@
       //
     }
     onClickBack() {
-      if(this.onClickLeft){
+      if (this.onClickLeft) {
         console.log(this.onClickLeft);
         this.onClickLeft('子组件传入');
-      }else {
+      } else {
         this.$router.back();
       }
     }
