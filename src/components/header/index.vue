@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
-  import { Getter, Action } from 'vuex-class'
+  import { Getter, Action } from 'vuex-class';
   import { HeaderData } from '@/types/components/header.d';
   // import {  } from "@/components" // 组件
 
@@ -27,11 +27,11 @@
     @Prop({
       required: false,
       default: ''
-    }) onClickLeft!: (text: string)=> void;
+    }) onClickLeft!: (text: string) => void;
 
     data: HeaderData = {
       componentName: 'header'
-    }
+    };
 
     created() {
       //
