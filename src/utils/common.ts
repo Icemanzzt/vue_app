@@ -112,10 +112,11 @@ export const formatDate = (date: any, fmt: string) => {
 export const verifyPhone = (phone: string | number) => {
     const reg = /^1[34578][0-9]{9}$/;
     const _phone = phone.toString().trim();
-    const toastStr = _phone === '' ? '手机号不能为空~' : !reg.test(_phone) && '请输入正确手机号~';
+    const isPhoneNumber = reg.test(_phone);
+    const msg = _phone === '' ? '手机号不能为空~' : !isPhoneNumber ?  '请输入正确手机号' : '手机号校验通过';
     return {
-        errMsg: toastStr,
-        done: !toastStr,
+        msg,
+        isPhoneNumber,
         value: _phone
     };
 };
