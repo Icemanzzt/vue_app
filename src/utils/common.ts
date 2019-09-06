@@ -52,7 +52,7 @@ export const hasKey = (obj: any, key: string | number) => {
  * @return: string
  */
 export const getDate = (fmt: any) => {
-    let time = '';
+    let time = fmt;
     const date = new Date();
     const o: any = {
         'M+': date.getMonth() + 1, // 月份
@@ -64,11 +64,11 @@ export const getDate = (fmt: any) => {
         'S': date.getMilliseconds() // 毫秒
     };
     if (/(y+)/.test(fmt)) {
-        time = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+        time = time.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
     }
     for (const k in o) {
         if (new RegExp('(' + k + ')').test(fmt)) {
-            time = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+            time = time.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
         }
     }
     return time;
@@ -81,8 +81,9 @@ export const getDate = (fmt: any) => {
  * @return: string
  */
 export const formatDate = (date: any, fmt: string) => {
-    let time = '';
+    let time = fmt;
     const o: any = {
+        // 'y+': date.getFullYear + 1, // 月份
         'M+': date.getMonth() + 1, // 月份
         'd+': date.getDate(), // 日
         'H+': date.getHours(), // 小时
@@ -92,11 +93,11 @@ export const formatDate = (date: any, fmt: string) => {
         'S': date.getMilliseconds() // 毫秒
     };
     if (/(y+)/.test(fmt)) {
-        time = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+        time = time.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
     }
     for (const k in o) {
         if (new RegExp('(' + k + ')').test(fmt)) {
-            time = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+            time = time.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
         }
     }
     return time;
