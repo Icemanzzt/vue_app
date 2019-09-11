@@ -2,9 +2,10 @@
 const fs = require('fs');
 const archiver = require('archiver');
 const path = require("path");
+const rimraf = require("rimraf");
 const p = path.resolve(__dirname ,'../vue_app.war');
 // create a file to stream archive data to.
-fs.rmdir(p, ()=>{
+rimraf(p, ()=>{
     const output = fs.createWriteStream(p);
     const archive = archiver('zip', {
         zlib: { level: 9 } // Sets the compression level.
@@ -54,5 +55,5 @@ fs.rmdir(p, ()=>{
 // finalize the archive (ie we are done appending files but streams have to finish yet)
 // 'close', 'end' or 'finish' may be fired right after calling this method so register to them beforehand
     archive.finalize();
-})
+});
 

@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Getter, Action, namespace } from 'vuex-class';
 import { mapGetters } from 'vuex';
-import {formatDate, verifyPhone} from '@/utils/common';
+import {formatDate, sliceStr} from '@/utils/common';
 import { ILoginData } from '@/types/views/login.d';
 import { gettersType, actionType } from '@/store/module/login'; // 组件
 import { Text } from '@/components'; // 组件
@@ -46,7 +46,6 @@ export default class Index extends Vue {
 
   mounted() {
     //
-    console.log(verifyPhone(15578227718));
   }
 
   onClickLeft = (text: string) => {
@@ -57,6 +56,8 @@ export default class Index extends Vue {
   }
 
   goHome() {
+    console.log(this.loginInfo);
+    return;
     this.$router.push('/home').catch((err) => {
       console.log(err);
     });

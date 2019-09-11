@@ -20,16 +20,26 @@ export const getToken = () => {
 };
 
 /**
+ * @author 钟章涛
  * @param {String} url
- * @description 从URL中解析参数
+ * @return {Object} paramObj
+ * @desc 从URL中解析参数,返回参数对象
  */
 export const getParams = (url: string) => {
-    const keyValueArr = url.split('?')[1].split('&');
     const paramObj: any = {};
-    keyValueArr.forEach(item => {
-        const keyValue = item.split('=');
-        paramObj[keyValue[0]] = keyValue[1];
-    });
+    if (url.includes('?')) {
+        const keyValueStr = url.split('?')[1];
+        let keyValueArr: string[] | [] = [];
+        if (keyValueStr.includes('&')) {
+            keyValueArr = keyValueStr.split('&');
+        } else {
+            keyValueArr = [keyValueStr];
+        }
+        keyValueArr.forEach(item => {
+            const keyValue = item.split('=');
+            paramObj[keyValue[0]] = keyValue[1];
+        });
+    }
     return paramObj;
 };
 
