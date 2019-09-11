@@ -3,6 +3,8 @@ const fs = require('fs');
 const archiver = require('archiver');
 const path = require("path");
 const rimraf = require("rimraf");
+const chalk = require('chalk');
+
 const p = path.resolve(__dirname ,'../vue_app.war');
 // create a file to stream archive data to.
 rimraf(p, ()=>{
@@ -14,8 +16,8 @@ rimraf(p, ()=>{
 // listen for all archive data to be written
 // 'close' event is fired only when a file descriptor is involved
     output.on('close', function() {
-        console.log(archive.pointer() + ' total bytes');
-        console.log('archiver has been finalized and the output file descriptor has closed.');
+        console.log(chalk.green(`压缩完成，压缩包位置-> ${p}`));
+        console.log(chalk.green.red(`压缩包大小：${archive.pointer()} bytes`));
     });
 
 // This event is fired when the data source is drained no matter what was the data source.
