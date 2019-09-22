@@ -5,7 +5,7 @@
   "scripts": {
     "start:dev": "vue-cli-service serve",
     "start:test": "vue-cli-service serve --mode test",
-    "build": "vue-cli-service build & node scripts/compress.js",
+    "build": "vue-cli-service build && node scripts/compress.js",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
