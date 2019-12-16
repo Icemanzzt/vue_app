@@ -1,13 +1,20 @@
-const readline = require('readline');
+var fs = require('fs');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+// 打开一个流:
+/*var rs = fs.createReadStream(__dirname+'/README.md', 'utf-8');
+
+rs.on('data', function (chunk) {
+    console.log('DATA:',chunk);
+    console.log(typeof chunk);
 });
 
-rl.question('你如何看待 Node.js 中文网？>', (answer) => {
-    // TODO：将答案记录在数据库中。
-    console.log(`感谢您的宝贵意见：${answer}`);
+rs.on('end', function () {
+    console.log('END');
+});
 
-    rl.close();
+rs.on('error', function (err) {
+    console.log('ERROR: ' + err);
+});*/
+fs.open(__dirname+'/package.json', (e,d)=>{
+    console.log(d);
 });

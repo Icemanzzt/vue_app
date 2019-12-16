@@ -18,7 +18,7 @@ const proxyUrlAndPort = {
         port: 8091
     }
 }
-const proxyUrlAndPortObj = proxyUrlAndPort[APP_ENV]
+const proxyUrlAndPortObj = proxyUrlAndPort[APP_ENV];
 const proxyUrl = proxyUrlAndPortObj? proxyUrlAndPortObj.url : ''; // 当前运行环境代理接口域名
 const port = proxyUrlAndPortObj ? proxyUrlAndPortObj.port : ''; // 当前运行环境代理端口
 const log = console.log;
