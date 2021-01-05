@@ -15,7 +15,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.138",
     "archiver": "^3.1.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "fastclick": "^1.0.6",
     "js-cookie": "^2.2.1",
